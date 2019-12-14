@@ -5,9 +5,13 @@ import {
   Card, Button, Container, Grid,
 } from 'semantic-ui-react';
 
+import ColumnForm from './columnForm';
+
 
 const Column = (props) => {
   const { id } = props;
+  const { title } = props;
+  const { color } = props;
   const { updateState } = props;
   return (
     <Card color={props.color}>
@@ -19,7 +23,13 @@ const Column = (props) => {
             </Grid.Column>
             <Grid.Column key={1}>
               <Container textAlign="right">
-                <Button icon="edit" />
+                <ColumnForm
+                  trigger={<Button icon="edit" />}
+                  updateState={updateState}
+                  title={title}
+                  color={color}
+                  id={id}
+                />
                 <Button
                   icon="delete"
                   onClick={() => {

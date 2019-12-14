@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ColumnGroup from './components/columnGroup';
-import Sidebar from './components/sidebar';
 
 function App() {
   return (

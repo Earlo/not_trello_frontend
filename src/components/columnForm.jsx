@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Form, Select, Modal } from 'semantic-ui-react';
+import {
+  Button, Form, Select, Modal,
+} from 'semantic-ui-react';
 import axios from 'axios';
 
 const ColumnForm = (props) => {
@@ -11,19 +13,47 @@ const ColumnForm = (props) => {
     key: 'blue',
     text: 'blue',
     value: 'blue',
+  }, {
+    key: 'green',
+    text: 'green',
+    value: 'green',
+  }, {
+    key: 'yellow',
+    text: 'yellow',
+    value: 'yellow',
+  }, {
+    key: 'pink',
+    text: 'pink',
+    value: 'pink',
+  }, {
+    key: 'black',
+    text: 'black',
+    value: 'black',
   }];
   const [title, setTitle] = useState(props.title || 'New list');
   const [color, setColor] = useState(props.color || 'red');
   const { updateState } = props;
   const { trigger } = props;
+  const { id } = props;
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    axios.post(`${process.env.REACT_APP_API_ENDPOINT}columns/add`, {
-      title,
-      color,
-    }).then(resolve => {
-      updateState();
-    });
+    console.log(id);
+    if (id) {
+      axios.put(`${process.env.REACT_APP_API_ENDPOINT}columns/update/${id}`, {
+        title,
+        color,
+      }).then((resolve) => {
+        updateState(true);
+      });
+    } else {
+      axios.post(`${process.env.REACT_APP_API_ENDPOINT}columns/add`, {
+        title,
+        color,
+      }).then((resolve) => {
+        updateState();
+      });
+    }
   };
   return (
     <Modal trigger={trigger} closeIcon>
@@ -44,7 +74,7 @@ const ColumnForm = (props) => {
               placeholder="red"
               search
               selection
-              defaultValue={color.key}
+              defaultValue={color}
               options={colors}
               onChange={(e) => setColor(e.target.innerText)}
             />
