@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Card } from 'semantic-ui-react';
+import { Card, Button, Modal, Container } from 'semantic-ui-react';
 import Column from './column';
+import ColumnForm from './columnForm';
 
+
+function arraysAreEqual(ary1, ary2) {
+  return (ary1.join('') === ary2.join(''));
+}
 
 const ColumnGroup = () => {
   const [columns, setColumns] = useState([]);
 
-  async function fetchData() {
+  async function fetchColumns() {
     const res = await axios.get(`${process.env.REACT_APP_API_ENDPOINT}columns`);
-    setColumns(res.data);
+    if (!arraysAreEqual(res.data, columns)) {
+      setColumns(res.data);
+    }
   }
+
   useEffect(() => {
-    fetchData();
+    fetchColumns();
   });
 
   return (
-    <Card.Group>
-      { columns.map((col) => <Column title={col.title} color={col.color} id={col._id} key={col._id} />)}
-    </Card.Group>
+    <Container fluid>
+      <ColumnForm trigger={<Button>Create a list</Button>} updateState={fetchColumns} />
+
+      <Card.Group>
+        { columns.map((col) => <Column title={col.title} color={col.color} id={col._id} key={col._id} updateState={fetchColumns} />)}
+      </Card.Group>
+    </Container>
   );
 };
 

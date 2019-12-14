@@ -8,6 +8,7 @@ import {
 
 const Column = (props) => {
   const { id } = props;
+  const { updateState } = props;
   return (
     <Card color={props.color}>
       <Card.Content>
@@ -22,7 +23,9 @@ const Column = (props) => {
                 <Button
                   icon="delete"
                   onClick={() => {
-                    axios.delete(`${process.env.REACT_APP_API_ENDPOINT}columns/${id}`);
+                    axios.delete(`${process.env.REACT_APP_API_ENDPOINT}columns/${id}`).then(resolve => {
+                      updateState();
+                    });
                   }}
                 />
               </Container>
