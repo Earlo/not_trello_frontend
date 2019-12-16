@@ -16,7 +16,7 @@ const Task = (props) => {
 
   const { parent } = props;
   const { updateState } = props;
-  console.log("istask", id);
+  console.log("istssassssk", id);
   return (
     <Card fluid color={color}>
       <Card.Content>

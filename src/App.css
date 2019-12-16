@@ -1,18 +1,29 @@
 .Column {
   height:100%;
   width: 340px;
+  overflow: auto;
 }
-
 
 .container {
-  position: relative;
-  display: block;
-  margin: 0 auto;
-  overflow: auto;
-  z-index:1000;
+  overflow: scroll, hidden;
+  white-space: nowrap;
+  vertical-align: top;
 }
+
+.ColumnContainer {
+  position: absolute;
+  height: 100%;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.cards {
+  display: block ruby !important;
+}
+
 
 .ui.grid > .column:not(.row) {
   padding-left: 0px;
   padding-right: 0px;
 }
+

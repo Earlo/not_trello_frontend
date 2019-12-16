@@ -18,7 +18,7 @@ const Column = (props) => {
   const { tasks } = props;
   const { updateState } = props;
 
-  console.log("is stask", tasks);
+  console.log("is s", tasks);
   return (
     <Card className="Column" color={props.color}>
       <Card.Content className="ColumnHeader">
