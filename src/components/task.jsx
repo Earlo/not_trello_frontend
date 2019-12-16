@@ -8,15 +8,15 @@ import {
 import TaskForm from './taskForm';
 
 const Task = (props) => {
-  console.log(props);
   const { id } = props.data;
   const { name } = props.data;
   const { desc } = props.data;
-  const [done, setDone] = useState(props.data.done || false);
+  const [status, setstatus] = useState(props.data.status || false);
   const { color } = props.data;
 
   const { parent } = props;
   const { updateState } = props;
+  console.log("istask", id);
   return (
     <Card fluid color={color}>
       <Card.Content>
@@ -26,9 +26,16 @@ const Task = (props) => {
               <Button
                 circular
                 icon="checkmark"
-                color={done ? 'green' : 'grey'}
+                color={status ? 'green' : 'grey'}
                 onClick={() => {
-                  setDone(!done);
+                  const newStatus = !status;
+                  setstatus(newStatus);
+                  console.log("now my id is", id);
+                  axios.patch(`${process.env.REACT_APP_API_ENDPOINT}columns/${parent}/toggletask/${id}`, {
+                    status: newStatus,
+                  }).then((resolve) => {
+                    updateState(true);
+                  });
                 }}
               />
             </Grid.Column>

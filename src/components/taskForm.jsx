@@ -14,11 +14,9 @@ const TaskForm = (props) => {
   const { trigger } = props;
   const { id } = props;
   const { parent } = props;
-  console.log(parent, updateState, props);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(id);
     if (id) {
       axios.put(`${process.env.REACT_APP_API_ENDPOINT}columns/${parent}/edittask`, {
         id,
