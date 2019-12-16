@@ -37,6 +37,7 @@ const ColumnGroup = () => {
             color={col.color}
             id={col._id}
             priority={col.priority}
+            tasks={col.tasks}
             key={col._id}
             updateState={fetchColumns}
           />
