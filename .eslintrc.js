@@ -7,6 +7,13 @@ module.exports = {
     'plugin:react/recommended',
     'airbnb',
   ],
+  "rules": {
+    "jsx-a11y/label-has-for": [ 2, {
+      "required": {
+          "every": [ "id" ]
+      }
+    }]
+  },
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
