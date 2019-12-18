@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import {
-  Card, Grid, Button, Label, Input, Form,
+  Card, Grid, Button, Label, Input, Form, Container
 } from 'semantic-ui-react';
 
 import TaskForm from './taskForm';
@@ -30,7 +30,7 @@ const Task = (props) => {
     if (newComment != null && newComment !== '') {
       axios.patch(`${process.env.REACT_APP_API_ENDPOINT}columns/${parent}/addcomment/${id}`, {
         text: newComment,
-        user: "asd",
+        user: "Anonymous",
       }).then((resolve) => {
         setNewComment('');
         updateState(true);
@@ -49,7 +49,9 @@ const Task = (props) => {
           <Card.Content>
             <Card.Header>{c.user}</Card.Header>
             <Card.Meta>
-              <span>{c.text}</span>
+              <Container className="comment">
+                {c.text}
+              </Container>
             </Card.Meta>
           </Card.Content>
           <Card.Content extra>

@@ -27,3 +27,7 @@
   padding-right: 0px;
 }
 
+.comment {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
