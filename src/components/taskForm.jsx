@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import {
-  Button, Form, Select, Modal,
+  Button, Form, Modal, Input,
 } from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -9,7 +10,6 @@ const TaskForm = (props) => {
   const [desc, setDesc] = useState(props.desc || 'Lorem');
   const [status, setStatus] = useState(props.status || false);
   const [priority, setPriority] = useState(props.priority || 0);
-  const [comments, setComments] = useState(props.comments || []);
   const { updateState } = props;
   const { trigger } = props;
   const { id } = props;
@@ -47,19 +47,19 @@ const TaskForm = (props) => {
         <Form onSubmit={handleSubmit}>
           <Form.Field required width={4}>
             <label htmlFor="Name">Name</label>
-            <input
+            <Input
               id="Name"
               placeholder="Name"
-              defaultValue={name}
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </Form.Field>
           <Form.Field required width={10}>
             <label htmlFor="Desc">Description </label>
-            <input
+            <Input
               id="Desc"
               placeholder="Desc"
-              defaultValue={desc}
+              value={desc}
               onChange={(e) => setDesc(e.target.value)}
             />
           </Form.Field>

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import {
-  Card, Grid, Button, Label, Input, Form, Container
+  Card, Grid, Button, Input, Form, Container,
 } from 'semantic-ui-react';
 
 import TaskForm from './taskForm';
@@ -28,12 +27,19 @@ const Task = (props) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (newComment != null && newComment !== '') {
+      comments.push({
+        _id: (Math.random() * 1000).toString(10),
+        text: newComment,
+        user: 'Anonymous',
+        timestamp: Date.now(),
+      });
       axios.patch(`${process.env.REACT_APP_API_ENDPOINT}columns/${parent}/addcomment/${id}`, {
         text: newComment,
-        user: "Anonymous",
+        user: 'Anonymous',
       }).then((resolve) => {
         setNewComment('');
-        updateState(true);
+        updateState();
+        setComments(comments);
       });
     }
   };
@@ -88,7 +94,7 @@ const Task = (props) => {
       draggable
       onDragEnd={(e) => {
         const cc = document.getElementById('ColumnContainer');
-        console.log(e.screenX, e.screenY, cc.scrollLeft);
+        // console.log(e.screenX, e.screenY, cc.scrollLeft);
       }}
       onMouseEnter={() => setOnCard(true)}
       onMouseLeave={() => setOnCard(false)}
@@ -101,9 +107,10 @@ const Task = (props) => {
       <Card.Content>
         <Card.Header>
           <Grid container columns={3}>
-            <Grid.Column width={3} floated="left" key={0}>
+            <Grid.Column width={2} floated="left" key={0}>
               <Button
                 circular
+                size="mini"
                 icon="checkmark"
                 color={status ? 'green' : 'grey'}
                 onMouseEnter={() => setOnButton(true)}
@@ -119,14 +126,19 @@ const Task = (props) => {
                 }}
               />
             </Grid.Column>
-            <Grid.Column width={7} key={1}>
+            <Grid.Column width={8} key={1}>
               {name}
             </Grid.Column>
             <Grid.Column floated="right" key={2}>
-              <Button.Group icon>
+              <Button.Group
+                floated="right"
+                size="mini"
+                icon
+              >
                 <TaskForm
                   trigger={(
                     <Button
+                      size="mini"
                       floated="right"
                       icon="edit"
                       onMouseEnter={() => setOnButton(true)}
@@ -138,12 +150,14 @@ const Task = (props) => {
                   )}
                   updateState={updateState}
                   name={name}
+                  desc={desc}
                   color={color}
                   id={id}
                   parent={parent}
                 />
                 <Button
                   icon="delete"
+                  size="mini"
                   onMouseEnter={() => setOnButton(true)}
                   onMouseLeave={() => setOnButton(false)}
                   onClick={() => {

@@ -5,7 +5,6 @@ import {
   Card, Button, Grid,
 } from 'semantic-ui-react';
 
-import { scryRenderedComponentsWithType } from 'react-dom/test-utils';
 import TaskForm from './taskForm';
 import Task from './task';
 import ColumnForm from './columnForm';
