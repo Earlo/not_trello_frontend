@@ -28,7 +28,7 @@ const ColumnGroup = () => {
   });
 
   return (
-    <Container className="ColumnContainer" fluid>
+    <Container id="ColumnContainer" className="ColumnContainer" fluid>
       <ColumnForm trigger={<Button>Create a list</Button>} updateState={fetchColumns} />
       <Card.Group>
         { columns.map((col) => (

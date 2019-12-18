@@ -1,7 +1,7 @@
-export default function user(state = [], action) {
+export default function user(state = 'Anonymous', action) {
   switch (action.type) {
-    case 'ADD_TODO':
-      return state.concat([action.text]);
+    case 'RENAME':
+      return action.text;
     default:
       return state;
   }

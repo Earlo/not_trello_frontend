@@ -46,16 +46,18 @@ const TaskForm = (props) => {
       <Modal.Content>
         <Form onSubmit={handleSubmit}>
           <Form.Field required width={4}>
-            <label>Name</label>
+            <label htmlFor="Name">Name</label>
             <input
+              id="Name"
               placeholder="Name"
               defaultValue={name}
               onChange={(e) => setName(e.target.value)}
             />
           </Form.Field>
           <Form.Field required width={10}>
-            <label>Description </label>
+            <label htmlFor="Desc">Description </label>
             <input
+              id="Desc"
               placeholder="Desc"
               defaultValue={desc}
               onChange={(e) => setDesc(e.target.value)}

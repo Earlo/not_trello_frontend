@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 import {
@@ -29,7 +30,7 @@ const Task = (props) => {
     if (newComment != null && newComment !== '') {
       axios.patch(`${process.env.REACT_APP_API_ENDPOINT}columns/${parent}/addcomment/${id}`, {
         text: newComment,
-        user: 'Jebu',
+        user: "asd",
       }).then((resolve) => {
         setNewComment('');
         updateState(true);
@@ -41,6 +42,7 @@ const Task = (props) => {
     if (open) {
       const commentObjects = comments.map((c) => (
         <Card
+          key={c._id}
           fluid
           color={color}
         >
@@ -81,6 +83,11 @@ const Task = (props) => {
       fluid
       color={color}
       raised
+      draggable
+      onDragEnd={(e) => {
+        const cc = document.getElementById('ColumnContainer');
+        console.log(e.screenX, e.screenY, cc.scrollLeft);
+      }}
       onMouseEnter={() => setOnCard(true)}
       onMouseLeave={() => setOnCard(false)}
       onClick={() => {
